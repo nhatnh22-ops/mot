@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi"><head>
+<meta charset="utf-8" data-keep="">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" data-keep="">
+<link rel="preconnect" href="https://fonts.googleapis.com" data-keep="">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&amp;family=Inter:wght@300;400&amp;display=swap" rel="stylesheet" data-keep="">
+<title>một mình</title>
+<style data-keep="">
+:root{
+  --bg:#14161a; --ink:#ece8e1; --mute:#9a968f; --line:rgba(236,232,225,.22);
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14161a;--ink:#ece8e1;--mute:#9a968f;--line:rgba(236,232,225,.22)}}
+:root[data-theme="dark"]{--bg:#14161a;--ink:#ece8e1;--mute:#9a968f;--line:rgba(236,232,225,.22)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+header{position:fixed;top:0;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:calc(28px + env(safe-area-inset-top,0px)) clamp(20px,5vw,64px) 0}
+.mark{font-family:var(--serif);font-style:italic;font-size:1.15rem}
+nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px clamp(16px,3vw,36px);font-size:.85rem;letter-spacing:.04em}
+nav a{color:var(--mute);padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s}
+nav a:hover,nav a[aria-current="page"]{color:var(--ink);border-color:var(--ink)}
+.view{min-height:100vh;min-height:100dvh}
+.home{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 24px}
+.sky{position:absolute;inset:0;background:radial-gradient(ellipse 70% 45% at 50% 78%,rgba(232,168,124,.55),transparent 70%),radial-gradient(ellipse 120% 60% at 50% 100%,rgba(120,84,110,.6),transparent 70%),linear-gradient(180deg,#0d1018 0%,#1b2033 45%,#3a3047 75%,#6b4a55 100%);background-size:cover;background-position:center;animation:dawn 2.4s ease-out both}
+.grain{position:absolute;inset:0;opacity:.18;mix-blend-mode:overlay;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hero{position:relative;max-width:900px}
+h1{font-family:var(--serif);font-weight:300;font-size:clamp(3rem,11vw,8rem);letter-spacing:-.02em;line-height:1;margin:0 0 1.4rem}
+.tag{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,2.2vw,1.45rem);color:#d9d2c8;margin:0 0 2.6rem;line-height:1.5;white-space:pre-line}
+.btn{display:inline-block;border:1px solid var(--line);padding:.8rem 1.8rem;font-size:.85rem;letter-spacing:.06em;transition:background .25s,color .25s}
+a.btn:hover{background:var(--ink);color:#14161a}
+.credit{position:absolute;bottom:calc(24px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;font-size:.75rem;color:var(--mute);letter-spacing:.05em}
+@keyframes dawn{from{opacity:0;filter:brightness(.5)}to{opacity:1;filter:none}}
+.page{max-width:680px;margin:0 auto;padding:clamp(120px,20vh,180px) 24px 140px}
+.page h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,6vw,3.6rem);letter-spacing:-.01em;margin:0 0 .4em}
+.lead{font-family:var(--serif);font-style:italic;font-size:1.25rem;color:var(--mute);margin:0 0 2.5rem;line-height:1.5}
+.page p.para{font-family:var(--serif);font-size:1.15rem;line-height:1.8;margin:0 0 1.3em}
+.entry{position:relative;padding:1.4rem 0;border-top:1px solid var(--line)}
+.entry:last-of-type{border-bottom:1px solid var(--line)}
+.entry .d{display:block;font-size:.8rem;color:var(--mute);margin-bottom:.35rem}
+.entry .t{display:block;font-family:var(--serif);font-weight:400;font-size:1.35rem;margin-bottom:.3rem}
+.entry .s{display:block;font-family:var(--serif);color:var(--mute);line-height:1.6}
+.row{position:relative}
+/* edit mode */
+[contenteditable]{outline:1px dashed var(--line);outline-offset:4px;cursor:text;min-width:2ch}
+[contenteditable]:focus{outline:1px solid var(--ink)}
+.x{position:absolute;top:.4rem;right:0;background:none;border:1px solid var(--line);color:var(--mute);font:inherit;font-size:.75rem;padding:.2rem .6rem;cursor:pointer}
+.x:hover{color:var(--ink);border-color:var(--ink)}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:2rem 0 0;padding-top:1.4rem;border-top:1px dashed var(--line)}
+.tools input{background:transparent;border:1px solid var(--line);color:var(--ink);font:inherit;font-size:.85rem;padding:.4rem .7rem;width:11rem}
+.b{background:none;border:1px solid var(--line);color:var(--ink);font:inherit;font-size:.82rem;padding:.5rem 1rem;cursor:pointer;transition:background .2s,color .2s}
+.b:hover{background:var(--ink);color:#14161a}
+.b.main{background:var(--ink);color:#14161a}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:9;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px));background:rgba(20,22,26,.92);border-top:1px solid var(--line);backdrop-filter:blur(8px)}
+.bar .msg{font-size:.8rem;color:var(--mute);flex-basis:100%;text-align:center}
+.fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:9;background:rgba(20,22,26,.85);backdrop-filter:blur(8px)}
+@media (prefers-reduced-motion:reduce){.sky{animation:none}}
+</style>
+</head><body>
+<div id="app"></div>
+<script type="application/json" id="state">{"home":{"name":"một mình","tag":"một là tên của mình, mọi người gọi mình là một vì mình tên là Nhất","btn":"Hiểu hơn về một","credit":"tên_bạn_2026","img":null},"pages":[{"id":"about","label":"about","title":"about \"1\"","lead":"Một vài dòng về người đang viết...","paras":["Ở đây mình chia sẻ những câu chuyện dưới thế giới quan của mình, có thể đúng, có thể chưa đúng - có thể bạn sẽ hiểu mình hơn","Trang này là nơi mình giữ lại những điều dễ trôi mất: một buổi chiều, một câu nói, một cảm giác chưa kịp gọi tên."],"entries":[]},{"id":"mau-giao","label":"mẫu giáo","title":"mẫu giáo","lead":"Những ngày còn bé xíu.","paras":["Viết vài dòng về những gì bạn còn nhớ từ thời mẫu giáo."],"entries":[{"d":"2003","t":"Tiêu đề bài viết","s":"Một câu mở đầu ngắn cho ký ức này."}]},{"id":"cap-1","label":"cấp 1","title":"cấp 1","lead":"Cặp sách và giờ ra chơi.","paras":["Viết vài dòng về thời cấp 1."],"entries":[{"d":"2006","t":"Tiêu đề bài viết","s":"Một câu mở đầu ngắn cho ký ức này."}]},{"id":"cap-2","label":"cấp 2","title":"cấp 2","lead":"Lớn lên một chút.","paras":["Viết vài dòng về thời cấp 2."],"entries":[{"d":"2011","t":"Tiêu đề bài viết","s":"Một câu mở đầu ngắn cho ký ức này."}]},{"id":"cap-3","label":"cấp 3","title":"cấp 3","lead":"Những năm tháng cuối cùng ở trường.","paras":["Viết vài dòng về thời cấp 3."],"entries":[{"d":"2015","t":"Tiêu đề bài viết","s":"Một câu mở đầu ngắn cho ký ức này."}]},{"id":"sinh-vien","label":"sinh viên","title":"sinh viên","lead":"Tự do và những lần đầu tiên.","paras":["Viết vài dòng về thời sinh viên."],"entries":[{"d":"2018","t":"Tiêu đề bài viết","s":"Một câu mở đầu ngắn cho ký ức này."}]},{"id":"di-lam","label":"những ngày đi làm","title":"những ngày đi làm","lead":"Và bây giờ.","paras":["Viết vài dòng về những ngày đi làm."],"entries":[{"d":"2022","t":"Tiêu đề bài viết","s":"Một câu mở đầu ngắn cho ký ức này."}]}]}</script>
+<script id="code">
+(function(){
+var S=JSON.parse(document.getElementById("state").textContent);
+var app=document.getElementById("app");
+var editing=false,canEdit=false,assetsNS=null,artifactNS=null,msg="";
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function ce(){return editing?' contenteditable="true" spellcheck="false"':""}
+function F(path,text,tag,cls){return "<"+tag+' class="'+(cls||"")+'" data-p="'+path+'"'+ce()+">"+esc(text)+"</"+tag+">"}
+function route(){var h=(location.hash||"#home").slice(1);return S.pages.some(function(p){return p.id===h})?h:"home"}
+function setPath(path,val){var k=path.split("."),o=S;for(var i=0;i<k.length-1;i++)o=o[k[i]];o[k[k.length-1]]=val}
+function X(act,i){return editing?'<button class="x" data-act="'+act+'" data-i="'+i+'">xóa</button>':""}
+
+function render(){
+  var r=route(),H=S.home;
+  var nav=S.pages.map(function(p){return '<a href="#'+p.id+'"'+(p.id===r?' aria-current="page"':"")+">"+esc(p.label)+"</a>"}).join("");
+  var html='<header><a class="mark" href="#home">'+esc(H.name)+'</a><nav aria-label="Chính">'+nav+"</nav></header>";
+  if(r==="home"){
+    var bg=H.img?' style="background-image:linear-gradient(rgba(10,12,20,.35),rgba(10,12,20,.55)),url(/_blob/'+H.img+')"':"";
+    html+='<section class="view home"><div class="sky"'+bg+'></div><div class="grain"></div><div class="hero">'+
+      F("home.name",H.name,"h1")+F("home.tag",H.tag,"p","tag")+
+      (editing?F("home.btn",H.btn,"span","btn"):'<a class="btn" href="#'+S.pages[0].id+'">'+esc(H.btn)+"</a>")+
+      '</div><div class="credit"'+ce()+' data-p="home.credit">'+esc(H.credit)+"</div></section>";
+  }else{
+    var i=S.pages.findIndex(function(p){return p.id===r}),P=S.pages[i],b="pages."+i;
+    html+='<section class="view"><div class="page">'+F(b+".title",P.title,"h2")+F(b+".lead",P.lead,"p","lead");
+    P.paras.forEach(function(t,j){html+='<div class="row">'+F(b+".paras."+j,t,"p","para")+X("delpara",j)+"</div>"});
+    P.entries.forEach(function(e,j){var q=b+".entries."+j;
+      html+='<div class="entry">'+F(q+".d",e.d,"span","d")+F(q+".t",e.t,"span","t")+F(q+".s",e.s,"span","s")+X("delentry",j)+"</div>"});
+    if(editing)html+='<div class="tools"><button class="b" data-act="addpara">+ đoạn văn</button><button class="b" data-act="addentry">+ mục bài viết</button>'+
+      '<input data-p="'+b+'.label" value="'+esc(P.label)+'" aria-label="Tên thẻ trên menu" placeholder="tên thẻ"><button class="b" data-act="delpage">xóa trang này</button></div>';
+    html+="</div></section>";
+  }
+  if(editing){
+    html+='<div class="bar"><button class="b main" data-act="save">Lưu & xuất bản</button><button class="b" data-act="addpage">+ thêm thẻ/trang</button>'+
+      (r==="home"&&assetsNS?'<button class="b" data-act="img">Đổi ảnh nền</button>'+(S.home.img?'<button class="b" data-act="noimg">Bỏ ảnh nền</button>':"")+'<input type="file" id="file" accept="image/png,image/jpeg,image/webp" hidden>':"")+
+      '<button class="b" data-act="cancel">Hủy</button><div class="msg">'+esc(msg||"Bấm vào chữ có viền nét đứt để sửa. Nhớ bấm Lưu khi xong.")+"</div></div>";
+  }else if(canEdit){html+='<button class="b fab" data-act="edit">Chỉnh sửa</button>'}
+  app.innerHTML=html;window.scrollTo(0,0);
+}
+
+app.addEventListener("input",function(e){var t=e.target;if(!t.dataset.p)return;setPath(t.dataset.p,t.tagName==="INPUT"?t.value:t.textContent)});
+app.addEventListener("keydown",function(e){if(!editing||e.key!=="Enter"||!e.target.dataset.p)return;e.preventDefault();
+  if(e.target.dataset.p==="home.tag")document.execCommand("insertText",false,"\n")});
+app.addEventListener("paste",function(e){if(!editing||!e.target.isContentEditable)return;e.preventDefault();
+  document.execCommand("insertText",false,(e.clipboardData.getData("text/plain")||"").replace(/\s*\n\s*/g," "))});
+app.addEventListener("change",function(e){if(e.target.id!=="file"||!e.target.files[0])return;
+  msg="Đang tải ảnh lên…";render();
+  assetsNS.upload(e.target.files[0]).then(function(r){S.home.img=r.id;msg="Đã tải ảnh. Bấm Lưu để giữ lại."}).catch(function(er){msg="Không tải được ảnh ("+(er&&er.code||"lỗi")+")."}).then(render)});
+app.addEventListener("click",function(e){
+  var a=e.target.closest("[data-act]");if(!a)return;var act=a.dataset.act,i=+a.dataset.i,r=route(),P=S.pages.find(function(p){return p.id===r});
+  if(act==="edit"){editing=true;msg="";render()}
+  else if(act==="cancel"){location.reload()}
+  else if(act==="delpara"){P.paras.splice(i,1);render()}
+  else if(act==="delentry"){P.entries.splice(i,1);render()}
+  else if(act==="addpara"){P.paras.push("Đoạn văn mới.");render()}
+  else if(act==="addentry"){P.entries.push({d:"01.2026",t:"Tiêu đề mới",s:"Mô tả ngắn."});render()}
+  else if(act==="addpage"){var id="p"+Date.now().toString(36);S.pages.push({id:id,label:"thẻ mới",title:"thẻ mới",lead:"Mô tả ngắn.",paras:["Nội dung."],entries:[]});location.hash="#"+id}
+  else if(act==="delpage"){if(S.pages.length>1&&confirm("Xóa trang này?")){S.pages=S.pages.filter(function(p){return p!==P});location.hash="#home";render()}else if(S.pages.length<=1){msg="Cần giữ ít nhất một trang."; render()}}
+  else if(act==="img"){document.getElementById("file").click()}
+  else if(act==="noimg"){S.home.img=null;render()}
+  else if(act==="save"){save()}
+});
+window.addEventListener("hashchange",render);
+
+function buildDoc(){
+  var keep=[].slice.call(document.head.querySelectorAll("[data-keep]")).map(function(n){return n.outerHTML}).join("\n");
+  var json=JSON.stringify(S).replace(/</g,"\\u003c");
+  var code=document.getElementById("code").textContent;
+  return '<!DOCTYPE html>\n<html lang="vi"><head>\n'+keep.replace(/<style/,"<title>"+esc(S.home.name)+"</title>\n<style")+'\n</head><body>\n<div id="app"></div>\n<script type="application/json" id="state">'+json+'<\/script>\n<script id="code">'+code+"<\/script>\n</body></html>";
+}
+function save(){
+  if(!artifactNS){msg="Không lưu được ở chế độ này.";render();return}
+  msg="Đang lưu…";render();
+  artifactNS.publish(buildDoc()).catch(function(er){
+    msg=er&&er.code==="conflict"?"":(er&&(er.code==="not_writer"||er.code==="not_granted")?"Bạn không có quyền sửa trang này.":"Lưu chưa được ("+(er&&er.code||"lỗi")+"). Thử lại nhé.");render()});
+}
+render();
+if(window.claude&&claude.use){
+  Promise.all([claude.use("user"),claude.use("artifact"),claude.use("assets")]).then(function(v){
+    artifactNS=v[1];assetsNS=v[2];
+    return v[0]&&v[0].canEdit?v[0].canEdit():false}).then(function(ok){canEdit=!!ok&&!!artifactNS;if(canEdit&&!editing)render()}).catch(function(){});
+}
+})();
+</script>
+</body></html>
